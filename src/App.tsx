@@ -52,7 +52,6 @@ export default function App() {
     { x: 7, y: 9 },
   ]);
 
-  const [dir, setDir] = useState<Dir>("right");
   const [nextDir, setNextDir] = useState<Dir>("right");
   const [food, setFood] = useState<Cell>({ x: 4, y: 6 });
 
@@ -202,7 +201,6 @@ export default function App() {
     loopRef.current = window.setInterval(() => {
       setSnake((prev) => {
         const d = nextDir;
-        setDir(d);
 
         const v = dirVec(d);
         const head = prev[0];
