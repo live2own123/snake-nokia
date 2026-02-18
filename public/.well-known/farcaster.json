@@ -1,0 +1,15 @@
+{
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
+  },
+  "miniapp": {
+    "version": "1",
+    "name": "snake",
+    "iconUrl": "https://YOURDOMAIN/favicon.svg",
+    "homeUrl": "https://YOURDOMAIN",
+    "splashImageUrl": "https://YOURDOMAIN/favicon.svg",
+    "splashBackgroundColor": "#0A1020"
+  }
+}
