@@ -87,14 +87,13 @@ export default function App() {
   function restart() {
     stopLoop();
 
-    const startSnake = [
+    const startSnake: Cell[] = [
       { x: 9, y: 9 },
       { x: 8, y: 9 },
       { x: 7, y: 9 },
     ];
 
     setSnake(startSnake);
-    setDir("right");
     setNextDir("right");
     setFood(spawnFood(startSnake));
     setScore(0);
@@ -201,7 +200,6 @@ export default function App() {
     loopRef.current = window.setInterval(() => {
       setSnake((prev) => {
         const d = nextDir;
-
         const v = dirVec(d);
         const head = prev[0];
 
