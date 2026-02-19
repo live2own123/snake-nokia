@@ -1,4 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { sdk } from "@farcaster/miniapp-sdk";
+
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type Cell = { x: number; y: number };
 type Dir = "up" | "down" | "left" | "right";
@@ -43,6 +46,10 @@ function wrap(n: number) {
 }
 
 export default function App() {
+useEffect(() => {
+  sdk.actions.ready();
+}, []);
+
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const loopRef = useRef<number | null>(null);
 
@@ -330,3 +337,4 @@ const btnStyle: React.CSSProperties = {
   padding: "10px 12px",
   fontSize: 14,
 };
+
