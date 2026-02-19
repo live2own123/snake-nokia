@@ -5,11 +5,11 @@
     "signature": ""
   },
   "miniapp": {
-    "version": "1",
-    "name": "snake",
-    "iconUrl": "https://snakenokiabase.vercel.app/favicon.svg",
-    "homeUrl": "https://snakenokiabase.vercel.app",
-    "splashImageUrl": "https://snakenokiabase.vercel.app/favicon.svg",
-    "splashBackgroundColor": "#0A1020"
-  }
+  "version": "1",
+  "name": "snake",
+  "iconUrl": "https://snakenokiabase.vercel.app/app-icon.png",
+  "homeUrl": "https://snakenokiabase.vercel.app/",
+  "splashImageUrl": "https://snakenokiabase.vercel.app/app-icon.png",
+  "splashBackgroundColor": "#0A1020"
+}
 }
