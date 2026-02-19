@@ -7,9 +7,9 @@
   "miniapp": {
     "version": "1",
     "name": "snake",
-    "iconUrl": "https://YOURDOMAIN/favicon.svg",
-    "homeUrl": "https://YOURDOMAIN",
-    "splashImageUrl": "https://YOURDOMAIN/favicon.svg",
+    "iconUrl": "https://snakenokiabase.vercel.app/favicon.svg",
+    "homeUrl": "https://snakenokiabase.vercel.app",
+    "splashImageUrl": "https://snakenokiabase.vercel.app/favicon.svg",
     "splashBackgroundColor": "#0A1020"
   }
 }
