@@ -1,17 +1,31 @@
 {
   "accountAssociation": {
-    "header": "",
-    "payload": "",
-    "signature": ""
+    "header": "YOUR_HEADER",
+    "payload": "YOUR_PAYLOAD",
+    "signature": "YOUR_SIGNATURE"
   },
   "miniapp": {
-  "version": "1",
-  "name": "snake",
-  "homeUrl": "https://snakenokiabase.vercel.app/",
-  "imageUrl": "https://snakenokiabase.vercel.app/app-icon.png",
-  "iconUrl": "https://snakenokiabase.vercel.app/app-icon.png",
-  "splashImageUrl": "https://snakenokiabase.vercel.app/splash.png",
-  "splashBackgroundColor": "#0A1020",
-  "ogImageUrl": "https://snakenokiabase.vercel.app/og.png"
-}
+    "version": "1",
+    "name": "snake",
+    "homeUrl": "https://snakenokiabase.vercel.app/",
+    "iconUrl": "https://snakenokiabase.vercel.app/app-icon.png",
+    "splashImageUrl": "https://snakenokiabase.vercel.app/app-icon.png",
+    "splashBackgroundColor": "#0A1020",
+
+    "primaryCategory": "games",
+    "tags": ["games", "arcade", "snake"],
+    "tagline": "classic snake, base style",
+    "subtitle": "snake game",
+    "description": "a simple snake game that runs inside base app",
+
+    "heroImageUrl": "https://snakenokiabase.vercel.app/og.png",
+    "screenshotUrls": [
+      "https://snakenokiabase.vercel.app/shot1.png"
+    ],
+    "ogTitle": "snake",
+    "ogDescription": "classic snake mini app",
+    "ogImageUrl": "https://snakenokiabase.vercel.app/og.png",
+
+    "imageUrl": "https://snakenokiabase.vercel.app/og.png"
+  }
 }
