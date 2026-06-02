@@ -43,7 +43,7 @@ export function GameOverActions({ finalScore }: { finalScore: number }) {
 
   return (
     <div className="card-onchain">
-      <span className="card-onchain-label">on-chain · Base Sepolia</span>
+      <span className="card-onchain-label">on-chain · Base</span>
 
       <div className="card-onchain-grid">
         <button

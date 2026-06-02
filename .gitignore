@@ -12,6 +12,21 @@ dist
 dist-ssr
 *.local
 
+# Env / secrets
+.env
+.env.*
+contracts/.env
+
+# Next.js
+.next/
+next-env.d.ts
+*.tsbuildinfo
+
+# Foundry build artifacts
+contracts/cache/
+contracts/out/
+contracts/broadcast/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
