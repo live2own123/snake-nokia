@@ -37,3 +37,8 @@ contracts/broadcast/
 *.njsproj
 *.sln
 *.sw?
+.vercel
+.env*
+
+# Installed agent skills (not part of the app)
+.agents/

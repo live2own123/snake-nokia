@@ -1,23 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useAccount, useConnect, useConnectors, useDisconnect, type Connector } from "wagmi";
+import { useAccount, useConnect, useConnectors, useDisconnect } from "wagmi";
 
 function short(addr: string) {
   return `${addr.slice(0, 6)}…${addr.slice(-4)}`;
-}
-
-// The Farcaster Mini App connector only works inside a Mini App host; in a
-// browser it is a no-op. We hide it from the picker (MiniKit's AutoConnect
-// still uses it automatically inside Base App). Everything else in the
-// connector list is an EIP-6963-discovered browser wallet (Rabby, MetaMask, …).
-function isMiniAppConnector(c: Connector) {
-  return (
-    c.type === "farcasterFrame" ||
-    c.type === "farcasterMiniApp" ||
-    /farcaster|mini\s?app/i.test(c.id) ||
-    /farcaster|mini\s?app/i.test(c.name)
-  );
 }
 
 // "User rejected the request" (EIP-1193 code 4001) — the user dismissed the
@@ -62,15 +49,13 @@ export function ConnectControl() {
     );
   }
 
-  // Only EIP-6963-discovered wallets: the single declared connector is the
-  // Mini App one, which we exclude — so what remains was discovered. Each
-  // installed wallet (Rabby, MetaMask, Frame, …) announces with a distinct
-  // rdns -> distinct connector id, so we dedupe by id (NOT name) to keep every
-  // distinct wallet when several are installed, while collapsing a wallet that
-  // happens to announce twice.
+  // All connectors are EIP-6963-discovered wallets (none are declared in the
+  // wagmi config). Each installed wallet (Rabby, MetaMask, Frame, …) announces
+  // with a distinct rdns -> distinct connector id, so we dedupe by id (NOT name)
+  // to keep every distinct wallet when several are installed, while collapsing a
+  // wallet that happens to announce twice.
   const seen = new Set<string>();
   const wallets = connectors.filter((c) => {
-    if (isMiniAppConnector(c)) return false;
     if (seen.has(c.id)) return false;
     seen.add(c.id);
     return true;

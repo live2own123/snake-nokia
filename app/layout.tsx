@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import "@coinbase/onchainkit/styles.css";
 import "./globals.css";
 import { Providers } from "./providers";
 
@@ -12,11 +11,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "snake",
-  description: "Classic Snake, Base style — a mini app on Base.",
-  // Carry over the existing Base App id from the old index.html.
-  other: {
-    "base:app_id": "69a93ce2223099cde830596c",
-  },
+  description: "Classic Snake, Base style — an onchain game on Base.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

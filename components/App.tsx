@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { useAccount, useReadContract } from "wagmi";
-import { useMiniKit } from "@coinbase/onchainkit/minikit";
 
 import type { Cell, Dir } from "../lib/types";
 import { CANVAS } from "../lib/theme";
@@ -53,13 +52,6 @@ function spawnFood(s: Cell[]): Cell {
 }
 
 export default function App() {
-  // MiniKit: dismiss the host splash once the app has mounted (replaces the
-  // old @farcaster/miniapp-sdk `sdk.actions.ready()` call).
-  const { setFrameReady, isFrameReady } = useMiniKit();
-  useEffect(() => {
-    if (!isFrameReady) setFrameReady();
-  }, [isFrameReady, setFrameReady]);
-
   // On-chain player name (NameRegistry). The nameOf read targets Base mainnet
   // regardless of the wallet's current chain, so registration state is accurate
   // even when the wallet is on the wrong network.

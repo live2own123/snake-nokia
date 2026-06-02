@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@coinbase/onchainkit": "^1.1.2",
     "@tanstack/react-query": "^5.100.14",
     "next": "^15.3.0",
     "ox": "^0.14.27",
