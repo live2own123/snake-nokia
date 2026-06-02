@@ -1,0 +1,28 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+solc = "0.8.24"
+evm_version = "cancun"
+optimizer = true
+optimizer_runs = 200
+# The on-chain SVG builder concatenates many strings; via-IR avoids
+# "stack too deep" and produces better-optimized bytecode.
+via_ir = true
+remappings = [
+    "@openzeppelin/=lib/openzeppelin-contracts/",
+]
+
+# RPC endpoints. The Sepolia URL is read from the environment so no secrets
+# live in this file. Set BASE_SEPOLIA_RPC_URL before deploying (see report).
+[rpc_endpoints]
+base_sepolia = "${BASE_SEPOLIA_RPC_URL}"
+# Base mainnet (chainId 8453) — for the Phase F production deploy. Public RPC.
+base_mainnet = "https://mainnet.base.org"
+
+# Optional contract verification on Basescan (Sepolia). Reads BASESCAN_API_KEY
+# from the environment; nothing is hardcoded here.
+[etherscan]
+base_sepolia = { key = "${BASESCAN_API_KEY}", chain = 84532, url = "https://api-sepolia.basescan.org/api" }
+
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
