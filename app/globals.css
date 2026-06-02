@@ -102,6 +102,9 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 0;
+  /* If the stack (board + controls + D-pad + check-in) is taller than the
+     viewport on short phones, allow scrolling so the check-in stays reachable. */
+  overflow-y: auto;
 }
 
 .stage {
@@ -321,18 +324,18 @@ body {
   background: var(--surface);
 }
 
-/* ---------------- D-pad ---------------- */
+/* ---------------- D-pad (keyboard-style cross) ----------------
+   Row 1: UP centered.  Row 2: LEFT, DOWN, RIGHT. */
 .dpad {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   grid-template-areas:
     ".    up    ."
-    "left .     right"
-    ".    down  .";
+    "left down  right";
   gap: 8px;
   width: min(64vw, 220px);
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 3 / 2;
   margin: 2px auto 0;
 }
 
@@ -406,14 +409,16 @@ body {
   white-space: nowrap;
 }
 
-.onchain-hud {
-  flex: 0 0 auto;
+/* Check-in docked under the D-pad (replaces the old top HUD). Full stage width
+   on mobile and desktop alike, so the streak + button are always reachable. */
+.checkin-dock {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
   justify-content: center;
-  width: min(92vw, 380px);
-  margin: 0 auto 4px;
+  width: 100%;
+}
+
+.checkin-dock .onchain-card {
+  width: 100%;
 }
 
 .onchain-card {

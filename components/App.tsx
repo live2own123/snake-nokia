@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { useAccount, useReadContract } from "wagmi";
+import { useQueryClient } from "@tanstack/react-query";
 
 import type { Cell, Dir } from "../lib/types";
 import { CANVAS } from "../lib/theme";
@@ -56,7 +57,12 @@ export default function App() {
   // regardless of the wallet's current chain, so registration state is accurate
   // even when the wallet is on the wrong network.
   const { address, isConnected, chainId } = useAccount();
-  const { data: nameData, refetch: refetchName } = useReadContract({
+  const queryClient = useQueryClient();
+  const {
+    data: nameData,
+    refetch: refetchName,
+    queryKey: nameQueryKey,
+  } = useReadContract({
     ...NAME_REGISTRY,
     functionName: "nameOf",
     args: [address!],
@@ -65,6 +71,15 @@ export default function App() {
   });
   const playerName = typeof nameData === "string" && nameData.length > 0 ? nameData : "";
   const isRegistered = playerName.length > 0;
+
+  // Called once the register tx is CONFIRMED (RegisterName fires it on
+  // isConfirmed only). Reactively re-reads nameOf so the gate flips to playable
+  // and the name badge appears — no manual reload. Invalidate + refetch makes
+  // the re-read reliable even if the cached value is otherwise considered fresh.
+  const handleRegistered = useCallback(() => {
+    queryClient.invalidateQueries({ queryKey: nameQueryKey });
+    refetchName();
+  }, [queryClient, nameQueryKey, refetchName]);
 
   // Gameplay is a HARD gate: connected + on Base mainnet + a registered name.
   const isWrongNetwork = isConnected && chainId != null && chainId !== CHAIN_ID;
@@ -321,14 +336,6 @@ export default function App() {
         </div>
       </header>
 
-      {/* Daily check-in (network-gated): only shown on Base mainnet. On the
-          wrong chain the board overlay surfaces the switch action instead. */}
-      {isConnected && !isWrongNetwork && (
-        <div className="onchain-hud">
-          <CheckInPanel />
-        </div>
-      )}
-
       <main className="stage-wrap">
         <div className="stage">
           <div className="topbar">
@@ -369,7 +376,7 @@ export default function App() {
                   ) : (
                     <>
                       <div className="overlay-title">register to play</div>
-                      <RegisterName onRegistered={refetchName} />
+                      <RegisterName onRegistered={handleRegistered} />
                     </>
                   )}
                 </div>
@@ -419,6 +426,15 @@ export default function App() {
           </div>
 
           <DPad onDir={changeDir} disabled={!canPlay} />
+
+          {/* Daily check-in lives next to the D-pad so it's always reachable on
+              mobile. Network-gated: only on Base mainnet (wrong chain shows the
+              switch action on the board). Same CheckIn logic, single instance. */}
+          {isConnected && !isWrongNetwork && (
+            <div className="checkin-dock">
+              <CheckInPanel />
+            </div>
+          )}
 
           <div className="hint">arrows · swipe · or tap the pad — walls wrap, only self-hits end the run</div>
         </div>
